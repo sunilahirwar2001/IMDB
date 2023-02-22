@@ -40,4 +40,4 @@ const Cards = ({movie}) => {
     </>
 }
 
-export default Cards
+export default Cards;
