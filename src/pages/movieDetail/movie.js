@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from "react"
 import "./movie.css"
+import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
+import VisibilityIcon from '@mui/icons-material/Visibility'
 
 const Movie = () => {
+    
     const [currentMovieDetail, setMovie] = useState()
     const { id } = useParams()
 
     useEffect(() => {
-        getData()
+        getData()          
         window.scrollTo(0,0)
     }, [])
 
@@ -33,9 +36,20 @@ const Movie = () => {
                         <div className="movie__name">{currentMovieDetail ? currentMovieDetail.original_title : ""}</div>
                         <div className="movie__tagline">{currentMovieDetail ? currentMovieDetail.tagline : ""}</div>
                         <div className="movie__rating">
+
+                   
+
+
                             {currentMovieDetail ? currentMovieDetail.vote_average: ""} <i class="fas fa-star" />
                             <span className="movie__voteCount">{currentMovieDetail ? "(" + currentMovieDetail.vote_count + ") votes" : ""}</span>
                         </div>  
+                        <button>
+                            <span>
+                                <VisibilityIcon/>
+                            </span>
+                        </button>
+                        <div>
+                        </div>
                         <div className="movie__runtime">{currentMovieDetail ? currentMovieDetail.runtime + " mins" : ""}</div>
                         <div className="movie__releaseDate">{currentMovieDetail ? "Release date: " + currentMovieDetail.release_date : ""}</div>
                         <div className="movie__genres">
@@ -59,9 +73,13 @@ const Movie = () => {
             </div>
             <div className="movie__links">
                 <div className="movie__heading">Useful Links</div>
-                {
-                    currentMovieDetail && currentMovieDetail.homepage && <a href={currentMovieDetail.homepage} target="_blank" style={{textDecoration: "none"}}><p><span className="movie__homeButton movie__Button">Homepage <i className="newTab fas fa-external-link-alt"></i></span></p></a>
-                }
+                {/* {
+                    currentMovieDetail && currentMovieDetail.homepage && <a href={currentMovieDetail.homepage} target="_blank" style={{textDecoration: "none"}}><p><span className="movie__homeButton movie__Button">Homepage
+                     <i className="newTab fas fa-external-link-alt"></i>
+                     </span></p></a>
+                } */}
+                <Link to ='/'><button  style={{border: '3px solid red ',fontSize:"35px",borderRadius:'10px',backgroundColor:'red',textFont:'white',cursor:"pointer"}}>Homepage                      <i className="newTab fas fa-external-link-alt"></i>
+</button></Link>
                 {
                     currentMovieDetail && currentMovieDetail.imdb_id && <a href={"https://www.imdb.com/title/" + currentMovieDetail.imdb_id} target="_blank" style={{textDecoration: "none"}}><p><span className="movie__imdbButton movie__Button">IMDb<i className="newTab fas fa-external-link-alt"></i></span></p></a>
                 }
